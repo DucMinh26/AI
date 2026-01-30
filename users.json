@@ -1,0 +1,74 @@
+[
+    {
+        "name": "khánh gay",
+        "age": 13,
+        "seen": true,
+        "personality": "friendly",
+        "profile": {
+            "likes": [
+                "tôi thích ăn cứt"
+            ],
+            "dislikes": [
+                "tôi ghét mưa"
+            ],
+            "goals": []
+        },
+        "memory": [
+            {
+                "role": "user",
+                "text": "tôi thích ăn cứt"
+            },
+            {
+                "role": "AI",
+                "text": "Chào em khánh gay, hôm nay thế nào?"
+            }
+        ]
+    },
+    {
+        "name": "minh",
+        "age": 21,
+        "seen": true,
+        "personality": "friendly",
+        "profile": {
+            "likes": [],
+            "dislikes": [
+                "tôi ghét cá"
+            ],
+            "goals": []
+        },
+        "memory": [
+            {
+                "role": "user",
+                "text": "hi"
+            },
+            {
+                "role": "AI",
+                "text": "Mình đang lắng nghe bạn đây!"
+            },
+            {
+                "role": "user",
+                "text": "hi"
+            },
+            {
+                "role": "AI",
+                "text": "Mình đang lắng nghe bạn đây!"
+            },
+            {
+                "role": "user",
+                "text": "tên"
+            },
+            {
+                "role": "AI",
+                "text": "Tên bạn là minh"
+            },
+            {
+                "role": "user",
+                "text": "tuổi"
+            },
+            {
+                "role": "AI",
+                "text": "Bạn 21 tuổi rồi"
+            }
+        ]
+    }
+]
