@@ -1,0 +1,56 @@
+{
+    "name": "khanh",
+    "age": 1,
+    "personality": "friendly",
+    "seen": true,
+    "profile": {
+        "likes": [
+            "ăn kem",
+            "ăn cơm"
+        ],
+        "dislikes": [],
+        "goals": []
+    },
+    "memory": [
+        {
+            "role": "khanh",
+            "text": "hạnh phúc"
+        },
+        {
+            "role": "Jarvis",
+            "text": "Nghe giọng bạn vui quá (Độ tin cậy: 95%)! Có chuyện gì kể mình nghe với?"
+        },
+        {
+            "role": "khanh",
+            "text": "khóc"
+        },
+        {
+            "role": "Jarvis",
+            "text": "Nghe giọng bạn buồn quá (Độ tin cậy: 100%)! Mình có thể giúp gì cho bạn không?"
+        },
+        {
+            "role": "khanh",
+            "text": "bình thường"
+        },
+        {
+            "role": "Jarvis",
+            "text": "Tôi đang lắng nghe đây"
+        },
+        {
+            "role": "khanh",
+            "text": "bình thường"
+        },
+        {
+            "role": "Jarvis",
+            "text": "Tôi đang lắng nghe đây"
+        },
+        {
+            "role": "khanh",
+            "text": "bye"
+        },
+        {
+            "role": "Jarvis",
+            "text": "Tôi đang lắng nghe đây"
+        }
+    ]
+}
