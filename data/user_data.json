@@ -5,13 +5,38 @@
     "seen": true,
     "profile": {
         "likes": [
-            "ăn kem",
-            "ăn cơm"
+            "ăn kem"
         ],
-        "dislikes": [],
+        "dislikes": [
+            "mưa"
+        ],
         "goals": []
     },
     "memory": [
+        {
+            "role": "khanh",
+            "text": "ghét gì"
+        },
+        {
+            "role": "Jarvis",
+            "text": "Bạn ghét mưa"
+        },
+        {
+            "role": "khanh",
+            "text": "vui"
+        },
+        {
+            "role": "Jarvis",
+            "text": "Nghe giọng bạn vui quá (Độ tin cậy: 90%)! Có chuyện gì kể mình nghe với?"
+        },
+        {
+            "role": "khanh",
+            "text": "buồn"
+        },
+        {
+            "role": "Jarvis",
+            "text": "Nghe giọng bạn buồn quá (Độ tin cậy: 90%)! Mình có thể giúp gì cho bạn không?"
+        },
         {
             "role": "khanh",
             "text": "hạnh phúc"
@@ -22,31 +47,7 @@
         },
         {
             "role": "khanh",
-            "text": "khóc"
-        },
-        {
-            "role": "Jarvis",
-            "text": "Nghe giọng bạn buồn quá (Độ tin cậy: 100%)! Mình có thể giúp gì cho bạn không?"
-        },
-        {
-            "role": "khanh",
             "text": "bình thường"
-        },
-        {
-            "role": "Jarvis",
-            "text": "Tôi đang lắng nghe đây"
-        },
-        {
-            "role": "khanh",
-            "text": "bình thường"
-        },
-        {
-            "role": "Jarvis",
-            "text": "Tôi đang lắng nghe đây"
-        },
-        {
-            "role": "khanh",
-            "text": "bye"
         },
         {
             "role": "Jarvis",
