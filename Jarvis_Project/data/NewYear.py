@@ -1,0 +1,1 @@
+print("Chúc bản thân năm mới vui vẻ, hạnh phúc và thành công! Hãy tiếp tục phát triển bản thân, đạt được những mục tiêu mới và tận hưởng những khoảnh khắc đáng nhớ trong năm mới này. Chúc bạn có một năm tràn đầy năng lượng và niềm vui!")

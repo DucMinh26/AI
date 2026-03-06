@@ -1,0 +1,7 @@
+# Giấu dữ liệu người dùng của Jarvis
+data/user_data.json
+data/users.json
+
+# Giấu các file tạm của Python
+__pycache__/
+*.pyc
