@@ -34,3 +34,30 @@ Trong giai đoạn này, mình tập trung vào bài toán **Phân loại (Class
 1. Clone repo: `git clone https://github.com/YourUsername/Neuro-sama.git`
 2. Cài đặt thư viện: `pip install -r requirements.txt`
 3. Chạy file main: `python main.py`
+
+## 🚀 Giai đoạn 2: Tiến tới Siêu Trí Tuệ (Day 75 - 80)
+
+Sau khi làm chủ các thuật toán Machine Learning cơ bản, mình đã bước sang thế giới của **Large Language Models (LLM)** và kết nối hệ thống với "đám mây".
+
+### 🧠 Cột mốc quan trọng: Ngày 80 - "Mượn não" khổng lồ
+
+Ở ngày này, mình đã thực hiện một bước nhảy vọt: Thay vì chạy các mô hình nhỏ tại máy, mình đã kết nối thành công với **Gemini 2.5 Flash API** của Google.
+
+**Các kỹ thuật đã đạt được:**
+
+* **API Integration:** Kết nối và điều khiển mô hình ngôn ngữ thế hệ mới nhất (2026).
+* **Security Best Practices:** * Sử dụng biến môi trường `.env` để bảo vệ API Key.
+  * Cấu hình `.gitignore` chuyên nghiệp để ngăn chặn rò rỉ dữ liệu lên GitHub.
+* **Environment Management:** Xử lý các xung đột thư viện giữa `google-generativeai`, `protobuf` và `tensorflow` trong môi trường Conda `jarvis_ai`.
+
+### 🛠 Công nghệ mới bổ sung
+
+* **API:** `Google Generative AI SDK` (Gemini 2.5/3.1).
+* **Security:** `python-dotenv`.
+* **Infrastructure:** gRPC communication protocol.
+
+### 🎥 Demo tính năng hiện tại
+
+* [X] Chat trực tiếp với Gemini 2.5 từ Terminal Python.
+* [X] Hệ thống bảo mật "Két sắt" không lộ mã nguồn.
+* [ ] *Coming soon (Day 85):* Tích hợp trí nhớ dài hạn (Chat History) vào file JSON.
