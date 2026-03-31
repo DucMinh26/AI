@@ -2,8 +2,9 @@ import streamlit as st
 import google.generativeai as genai
 import os
 from dotenv import load_dotenv
+from PIL import Image
 
-print("\n--- NGÀY 85: GIAO DIỆN WEB AI VỚI STREAMLIT ---")
+print("\n--- NGÀY 86: GIAO DIỆN WEB AI ĐA MÔ THỨC ---")
 
 #1. Cấu hình trang web
 st.set_page_config(page_title="Jarvis Chat", page_icon="🤖", layout="centered")
@@ -23,7 +24,7 @@ Bạn đóng vai là bạn gái của Minh.
 # Sử dụng st.cache_resource để Streamlit không khởi tạo lại AI mỗi lần bấm nút
 @st.cache_resource
 def load_model():
-    return genai.GenerativeModel("gemini-2.5-flasg",system_instruction=prompt_kich_ban)
+    return genai.GenerativeModel("gemini-2.5-flash",system_instruction=prompt_kich_ban)
 
 model = load_model()
 
@@ -33,20 +34,34 @@ if "chat_session" not in st.session_state:
     st.session_state.chat_session = model.start_chat(history=[])
 
 #4. Giao diện chat
-for message in st.session_state.chat_sesstion.history:
+for message in st.session_state.chat_session.history:
     #Google quy định máy là model, streamlit quy định là assistant
-    role="assistent" if message.role == "model" else "user"
+    role="assistant" if message.role == "model" else "user"
     with st.chat_message(role):
         st.markdown(message.parts[0].text)
 
-#5.Ô nhập đoạn chat cho user
-user_input =input("[USER]: ")
-if user_input:
-    #Hiện thị câu chat của user lên màn hình
-    with st.chat_message("user"):
-        st.markdown(user_input)
+#5.Thêm SideBar để upload ảnh
+with st.sidebar:
+    st.header("🖼️ Image")
+    uploaded_file = st.file_uploader("Chọn 1 bức ảnh", type=["jpg","jpeg","png"])
+    if uploaded_file is not None:
+        st.image(uploaded_file, caption="Ảnh bạn vừa chọn", width="stretch")#kéo dãn ảnh cho vừa cái khung
 
-    #Gửi cho AI và hiện thị câu trả lời
-    with st.chat_message("assistant"):
-        rep = st.session_state.chat_session.send_message(user_input)
-        st.markdown(rep.text)
+#6.Ô nhập liệu
+user_input = st.chat_input("[USER]: ")
+
+if user_input:
+        with st.chat_message("user"):
+            st.markdown(user_input)
+
+        with st.chat_message("assistant"):
+            with st.spinner("Jarvis đang suy nghĩ..."):
+
+                if uploaded_file is not None:
+                    img = Image.open(uploaded_file)
+                    rep = st.session_state.chat_session.send_message([img,user_input])
+
+                else:
+                    rep = st.session_state.chat_session.send_message(user_input)
+
+                st.markdown(rep.text)
