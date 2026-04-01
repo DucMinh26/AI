@@ -4,7 +4,7 @@ import os
 from dotenv import load_dotenv
 from PIL import Image
 
-print("\n--- NGÀY 88: QUẢN LÝ TRÍ NHỚ (SESSION STATE) VÀ NÚT 'NEW CHAT' ---")
+print("\n--- NGÀY 89: HOÀN THIỆN LOGIC ĐA MÔ THỨC VÀ LƯU TRỮ TRẠNG THÁI ẢNH ---")
 
 #1. Cấu hình trang web
 st.set_page_config(page_title="Jarvis Chat", page_icon="🤖", layout="centered")
@@ -33,13 +33,20 @@ model = load_model()
 if "chat_session" not in st.session_state:
     st.session_state.chat_session = model.start_chat(history=[])
 
+if "processed_image_id" not in st.session_state:
+    st.session_state.processed_image_id = None
+
 #4. Giao diện chat
 for message in st.session_state.chat_session.history:
     #Google quy định máy là model, streamlit quy định là assistant
     role="assistant" if message.role == "model" else "user"
     with st.chat_message(role):
-        st.markdown(message.parts[0].text)
-
+        for part in message.parts:
+            if part.text:
+                st.markdown(part.text) 
+            elif part.inline_data:
+                st.image(part.inline_data.data,width=300)#kéo dãn ảnh cho vừa cái khung
+                
 #5.Thêm SideBar để upload ảnh
 with st.sidebar:
     st.header("🖼️ Image")
@@ -63,9 +70,10 @@ if user_input:
 
     with st.chat_message("assistant"):
         
-        if uploaded_file is not None:
+        if uploaded_file is not None and uploaded_file.file_id != st.session_state.processed_image_id:
             img = Image.open(uploaded_file)
-            rep_stream = st.session_state.chat_session.send_message([img,user_input], stream=True)
+            rep_stream = st.session_state.chat_session.send_message([img,user_input], stream=True) 
+            st.session_state.processed_image_id = uploaded_file.file_id
 
         else:
             rep_stream = st.session_state.chat_session.send_message(user_input,stream=True)
@@ -75,6 +83,8 @@ if user_input:
                 yield chunk.text #yield giống như return tạm thời, trả về từng phần của phản hồi khi nó được tạo ra, thay vì phải đợi toàn bộ phản hồi hoàn chỉnh mới trả về
 
         st.write_stream(stream_generator())
+
+    st.rerun()
 
 #có stream= true thì là gửi thẳng 1 gói hàng rep to đùng hoàn chỉ rồi mình dùng rep.text.
 #Còn nếu có stream=true thì là cứ mỗi chữ là 1 gói hàng và được đặt vào cái thùng rep_stream 
