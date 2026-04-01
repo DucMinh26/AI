@@ -4,7 +4,7 @@ import os
 from dotenv import load_dotenv
 from PIL import Image
 
-print("\n--- NGÀY 87: HIỆU ỨNG GÕ CHỮ TRỰC TIẾP (STREAMING RESPONSE) ---")
+print("\n--- NGÀY 88: QUẢN LÝ TRÍ NHỚ (SESSION STATE) VÀ NÚT 'NEW CHAT' ---")
 
 #1. Cấu hình trang web
 st.set_page_config(page_title="Jarvis Chat", page_icon="🤖", layout="centered")
@@ -47,6 +47,13 @@ with st.sidebar:
     if uploaded_file is not None:
         st.image(uploaded_file, caption="Ảnh bạn vừa chọn", width="stretch")#kéo dãn ảnh cho vừa cái khung
 
+    st.divider()
+    st.header("⚙️ Settings")
+
+    if st.button("📝 New chat"):
+        st.session_state.chat_session = model.start_chat(history=[])
+        st.rerun()
+        
 #6.Ô nhập liệu
 user_input = st.chat_input("[USER]: ")
 
