@@ -4,7 +4,7 @@ import os
 from dotenv import load_dotenv
 from PIL import Image
 
-print("\n--- NGÀY 86: GIAO DIỆN WEB AI ĐA MÔ THỨC ---")
+print("\n--- NGÀY 87: HIỆU ỨNG GÕ CHỮ TRỰC TIẾP (STREAMING RESPONSE) ---")
 
 #1. Cấu hình trang web
 st.set_page_config(page_title="Jarvis Chat", page_icon="🤖", layout="centered")
@@ -51,17 +51,24 @@ with st.sidebar:
 user_input = st.chat_input("[USER]: ")
 
 if user_input:
-        with st.chat_message("user"):
-            st.markdown(user_input)
+    with st.chat_message("user"):
+        st.markdown(user_input)
 
-        with st.chat_message("assistant"):
-            with st.spinner("Jarvis đang suy nghĩ..."):
+    with st.chat_message("assistant"):
+        
+        if uploaded_file is not None:
+            img = Image.open(uploaded_file)
+            rep_stream = st.session_state.chat_session.send_message([img,user_input], stream=True)
 
-                if uploaded_file is not None:
-                    img = Image.open(uploaded_file)
-                    rep = st.session_state.chat_session.send_message([img,user_input])
+        else:
+            rep_stream = st.session_state.chat_session.send_message(user_input,stream=True)
 
-                else:
-                    rep = st.session_state.chat_session.send_message(user_input)
+        def stream_generator():
+            for chunk in rep_stream:
+                yield chunk.text #yield giống như return tạm thời, trả về từng phần của phản hồi khi nó được tạo ra, thay vì phải đợi toàn bộ phản hồi hoàn chỉnh mới trả về
 
-                st.markdown(rep.text)
+        st.write_stream(stream_generator())
+
+#có stream= true thì là gửi thẳng 1 gói hàng rep to đùng hoàn chỉ rồi mình dùng rep.text.
+#Còn nếu có stream=true thì là cứ mỗi chữ là 1 gói hàng và được đặt vào cái thùng rep_stream 
+#nên phải lấy từng gói hàng một rồi lôi phần text của gói hàng đấy ra     
