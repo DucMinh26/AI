@@ -10,6 +10,9 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables.history import RunnableWithMessageHistory
 from langchain_community.chat_message_histories import ChatMessageHistory
 from langchain_core.runnables import RunnablePassthrough
+import tempfile
+from langchain_community.document_loaders import PyPDFLoader
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 print("\n--- NGÀY 96: HỢP NHẤT RAG VÀO STREAMLIT ---")
 
@@ -96,16 +99,50 @@ with st.sidebar:
         st.session_state.store[session_id] = ChatMessageHistory()
         st.rerun()
 
+    st.divider()
+
+    st.header("NHẬP TÀI LIỆU")
+    up_file = st.file_uploader("Tải lên file PDF của bạn", type=["pdf"])
+
+    if st.button("XỬ LÝ TÀI LIỆU"):
+        if up_file is not None:
+            with st.spinner("Đang băm nhỏ và nhúng tài liệu..."):
+                with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp_file:
+                    tmp_file.write(up_file.getvalue())
+                    tmp_file_path = tmp_file.name
+
+                try:
+                    loader = PyPDFLoader(tmp_file_path)
+                    docs = loader.load()
+
+                    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
+                    chunks = text_splitter.split_documents(docs)
+
+                    embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+                    vecter_db = Chroma(persist_directory="F:/Neuro-sama/Jarvis_Project/notebooks/Phase2/database_groq", embedding_function=embeddings)
+
+                    vecter_db.add_documents(chunks)
+
+                    st.success(f"Đã nạp xong {len(chunks)} đoạn dữ liệu từ file!")
+                    
+                except Exception as e:
+                    st.error(f"Có lỗi xảy ra: {e}")
+                finally:
+                    # Dọn dẹp file tạm
+                    os.remove(tmp_file_path)
+        else:
+            st.warning("Bạn chưa chọn file PDF nào!")
+
 user_input = st.chat_input("Nhập câu hỏi của bạn về tài liệu...")
 
 if user_input:
     with st.chat_message('user'):
         st.markdown(user_input)
 
-    with st.spinner("Jarvis đang suy nghĩ..."):
-        ket_qua = day_chuyen_rag_with_memory.invoke(
-                {"input": user_input},
-                config={"configurable": {"session_id": session_id}}
-            )
-        st.markdown(ket_qua)
-        st.rerun()
+    with st.chat_message("assistant"): 
+        with st.spinner("Jarvis đang suy nghĩ..."):
+            ket_qua = day_chuyen_rag_with_memory.invoke(
+                    {"input": user_input},
+                    config={"configurable": {"session_id": session_id}}
+                )
+            st.markdown(ket_qua)
