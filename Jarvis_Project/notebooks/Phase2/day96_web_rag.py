@@ -42,6 +42,8 @@ def khoi_tao_rag():
     Hãy trả lời câu hỏi dựa TRÊN TÀI LIỆU được cung cấp dưới đây.
     Nếu tài liệu không có thông tin, hãy thẳng thắn trả lời "Tôi không tìm thấy thông tin này trong tài liệu", không được tự bịa ra.
     
+    ĐIỀU KIỆN BẮT BUỘC: Ở cuối câu trả lời, bạn LUÔN LUÔN phải trích dẫn (Tên file và Số trang) mà bạn đã dùng để lấy thông tin.
+    
     TÀI LIỆU CỦA NGƯỜI DÙNG:
     {context}
     """
