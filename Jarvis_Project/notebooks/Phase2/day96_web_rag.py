@@ -148,3 +148,5 @@ if user_input:
                     config={"configurable": {"session_id": session_id}}
                 )
             st.markdown(ket_qua)
+
+print("\n--- KẾT THÚC NGÀY 96 ---")
