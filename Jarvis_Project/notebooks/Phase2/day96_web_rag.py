@@ -149,4 +149,4 @@ if user_input:
                 )
             st.markdown(ket_qua)
 
-print("\n--- KẾT THÚC NGÀY 96 ---")
+print("\n--- KẾT THÚC NGÀY 96 ---") 
